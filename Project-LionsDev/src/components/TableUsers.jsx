@@ -1,61 +1,78 @@
-// hacer tabla html 
+// hacer tabla html
 
-import { useFetch } from "../hooks/useFetch"
-
+import { useNavigate } from "react-router-dom";
+import { useFetch } from "../hooks/useFetch";
+import { useDeleteUser } from "../hooks/useDeleteUser";
 
 export const TableUsers = () => {
 
-const {data} = useFetch()
+  const {mutate: deleteUser} = useDeleteUser()
+  const navigate = useNavigate();
 
+  const { data } = useFetch();
 
+  const handleNavigate = (url) => {
+    navigate(`${url}`);
+  };
+
+  const handleDelete = (id) =>{
+    deleteUser(id)
+  }
+
+  const handleNavigateToEdit = (id) =>{
+    navigate(`/editUserPage/${id}`)
+  }
 
   return (
-    <div className="tabla">
-       <table >
-    <thead>
-<tr>
-    <th className="name">Name</th>
-    <th>Email</th>
-    <th>Gender</th>
-    <th>Username</th>
-    <th>Website</th>
-    <th className="action">Actions</th>
-</tr>
-</thead>
+    <>
+      <button onClick={()=> handleNavigate("/addNewUser")}>add new user</button>
 
-<tbody>
-    {
-    data?.data.map((table) =>(
-         <tr>
-        <td>{table.name}</td>
-        <td>{table.email}</td>
-        <td>{table.city}</td>
-        <td>{table.username}</td>
-        <td>{table.website}</td>
+      <div className="tabla">
+        <table>
+          <thead>
+            <tr>
+              <th className="name">Name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Username</th>
+              <th>Website</th>
+              <th className="action">Actions</th>
+            </tr>
+          </thead>
 
- 
-        <td >
-        <div className="tdButton">
-            <button className="buttonEdit">Edit</button>
-            <button className="buttonView">View</button>
-            <button className="buttonDelete">Delete</button>
-        </div>
-        </td>
-        
-    </tr> 
-       ) )
-}
-</tbody>
+          <tbody>
+            {data?.data.map((table) => (
+              <tr>
+                <td>{table.name}</td>
+                <td>{table.email}</td>
+                <td>{table.city}</td>
+                <td>{table.username}</td>
+                <td>{table.website}</td>
 
-</table>
-</div>
-  )
-}
-
-
-// El formulario debe tener los siguientes campos
-// Name
-// Email
-// Gender
-// Username
-// Website
+                <td>
+                  <div className="tdButton">
+                    <button
+                      className="buttonEdit"
+                      onClick={() => handleNavigateToEdit(table.id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="buttonView"
+                      onClick={() =>
+                        handleNavigate(`/userDetails/:${table.id}`)
+                      }
+                    >
+                      View
+                    </button>
+                    <button className="buttonDelete" onClick={()=> handleDelete(table.id)}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+};
