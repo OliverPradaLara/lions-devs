@@ -1,0 +1,60 @@
+/* *{
+    box-sizing: border-box;
+}
+
+body{
+    background-color:white;
+    margin: 0;
+    
+} */
+
+.tabla {
+    border: 1px solid blue;
+    height: 100vh;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+   }
+
+   .tabla th,td{
+    border: 1px solid blue;
+
+   }
+
+
+
+
+   .buttonEdit {
+    background-color: blueviolet;
+    font-size: 30px;
+    color: white;
+   }
+
+   .buttonView {
+    background-color: green;
+    font-size: 30px;
+    color: white;
+   }
+
+   .buttonDelete {
+    background-color: red;
+    font-size: 30px;
+    color: white;
+   }
+
+   .tdButton {
+  
+    display: flex;
+    justify-content: space-around;
+
+   }
+
+   .action {
+    width: 40%;
+   }
+
+   .name {
+    width: 40%;
+   }
