@@ -1,6 +1,7 @@
+import { TableUsers } from "../components/TableUsers"
 
 export const TableUsersPage = () => {
   return (
-    <div>TableUsersPage</div>
+   <TableUsers />
   )
 }
